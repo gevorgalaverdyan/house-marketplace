@@ -41,7 +41,6 @@ function Category() {
             data: doc.data(),
           });
         });
-
         setListings(listings);
         setLoading(false);
       } catch (error) {
