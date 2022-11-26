@@ -11,16 +11,6 @@ import Spinner from '../Components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-
-// import { Swiper, SwiperSlide } from 'swiper/react';
-
-// // Import Swiper styles
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/scrollbar';
-
 function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,31 +39,6 @@ function Listing() {
     <Spinner />
   ) : (
     <main>
-      {/* <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={50}
-        slidesPerView={3}
-        navigation
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
-        className='swiper-container'
-      >
-        {listing.imgUrls.map((url, index) => (
-          <SwiperSlide key={index} > 
-            <div
-              className='swiperSlideDiv'
-            >
-              <img
-                src={listing.imgUrls[index]}
-                alt='slider img'
-                className='swiperSlideImg'
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
       <Swiper
         slidesPerView={1}
         pagination={{ clickable: true }}
