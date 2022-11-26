@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import rentCategoryImage from '../assets/jpg/rentCategoryImage.jpg';
 import sellCategoryImage from '../assets/jpg/sellCategoryImage.jpg';
+import Slider from '../Components/Slider';
 
 function Explore() {
   return (
@@ -10,7 +11,7 @@ function Explore() {
         <p className='pageHeader'>Explore</p>
       </header>
       <main>
-        {/*  */}
+        <Slider/>
 
         <p className='exploreCategoryHeading'>Categories</p>
         <div className='exploreCategories'>
@@ -20,9 +21,7 @@ function Explore() {
               alt='rentCategoryImage'
               className='exploreCategoryImg'
             />
-            <p className="exploreCategoryName">
-              Places for rent
-            </p>
+            <p className='exploreCategoryName'>Places for rent</p>
           </Link>
           <Link to={'/category/sale'}>
             <img
@@ -30,9 +29,7 @@ function Explore() {
               alt='sellCategoryImage'
               className='exploreCategoryImg'
             />
-            <p className="exploreCategoryName">
-              Places for sale
-            </p>
+            <p className='exploreCategoryName'>Places for sale</p>
           </Link>
         </div>
       </main>
