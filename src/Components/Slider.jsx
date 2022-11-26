@@ -9,7 +9,7 @@ import Spinner from './Spinner';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 function Slider() {
-  const [loading, letLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState(null);
 
   const navigate = useNavigate();
@@ -24,21 +24,45 @@ function Slider() {
       let listings = [];
 
       querySnap.forEach((doc) => {
-        return listings.push({ 
-            id: doc.id, 
-            data: doc.data() });
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
       });
 
-      console.log(listings)
+      setListings(listings);
+      setLoading(false);
     };
 
     getListing();
   }, []);
 
-  return (
-    <div>
-      <h1>slider</h1>
-    </div>
+  return loading ? (
+    <Spinner />
+  ) : (
+    <>
+      <p className='exploreHeading'>Recommended</p>
+      <Swiper
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        className='swiper-container'
+      >
+        {listings.map(({ data, id }) => (
+          <SwiperSlide
+            key={id}
+            onClick={() => navigate(`/category/${data.type}/${id}`)}
+            className='swiperSlideDiv'
+          >
+            <img src={data.imgUrls[0]} alt='' className='swiperSlideImg' />
+            <p className='swiperSlideText'>{data.name}</p>
+            <p className='swiperSlidePrice'>
+              ${data.discountedPrice ?? data.regularPrice}{' '}
+              {data.type === 'rent' && '/ month'}
+            </p>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
   );
 }
 
