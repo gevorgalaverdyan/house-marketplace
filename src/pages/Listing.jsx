@@ -11,6 +11,16 @@ import Spinner from '../Components/Spinner';
 import shareIcon from '../assets/svg/shareIcon.svg';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
+// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+// import { Swiper, SwiperSlide } from 'swiper/react';
+
+// // Import Swiper styles
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
+
 function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,20 +49,47 @@ function Listing() {
     <Spinner />
   ) : (
     <main>
-      <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+      {/* <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={50}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => console.log('slide change')}
+        className='swiper-container'
+      >
         {listing.imgUrls.map((url, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} > 
             <div
-              style={{
-                background: `url(${listing.imgUrls[index]}) center no-repeat`,
-                backgroundSize: 'cover',
-              }}
               className='swiperSlideDiv'
-            ></div>
+            >
+              <img
+                src={listing.imgUrls[index]}
+                alt='slider img'
+                className='swiperSlideImg'
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper> */}
+      <Swiper
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        className='swiper-container'
+      >
+        {listing.imgUrls.map((url, index) => (
+          <SwiperSlide key={index} className='swiperSlideDiv'>
+              <img
+                className='swiperSlideImg'
+                src={listing.imgUrls[index]}
+                alt={`house img ${index}`}
+              />
           </SwiperSlide>
         ))}
       </Swiper>
-      
+
       <div
         className='shareIconDiv'
         onClick={() => {
