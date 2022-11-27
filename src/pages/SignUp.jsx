@@ -9,6 +9,8 @@ import { setDoc, serverTimestamp, doc } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import { toast } from 'react-toastify';
+import OAuth from '../Components/OAuth';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -45,15 +47,15 @@ function SignUp() {
         displayName: name,
       });
 
-      const formDataCopy = {...formData};
+      const formDataCopy = { ...formData };
       delete formDataCopy.password;
       formDataCopy.timestamp = serverTimestamp();
 
-      await setDoc(doc(db, 'users', user.uid), formDataCopy)
+      await setDoc(doc(db, 'users', user.uid), formDataCopy);
 
       navigate('/');
     } catch (error) {
-      console.log(error);
+      toast.error('Registration Error, please try again');
     }
   };
 
@@ -115,7 +117,8 @@ function SignUp() {
           </div>
         </form>
 
-        {/* Google OAuth */}
+        <OAuth/>
+
         <Link to={'/sign-in'} className='registerLink'>
           Sign In Instead
         </Link>
