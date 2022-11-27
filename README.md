@@ -12,8 +12,32 @@
  
 
 ## Features:
-<b><i>Explore The Litings</i></b>
-<img src="./img/explore.png" alt="explore" height="10%">
+<b><i>Explore The Listings</i></b>
+<table>
+    <tr>
+        <td><img src="./img/explore.png" alt="explore"></td>
+        <td><img src="./img/exploreSell.png" alt="explore"></td>
+    </tr>
+    <tr>
+        <td><img src="./img/addDesc.png" alt="explore"></td>
+    </tr>
+</table>
 
+<b><i>Create your House Marketplace account using Google OAuth</i></b>
+<table>
+    <tr>
+        <td><img src="./img/Oauth.png" alt="explore"></td>
+    </tr>
+</table>
 
+<b><i>Create/Edit a Listing</i></b>
+<table>
+    <tr>
+        <td><img src="./img/create.png" alt="explore"></td>
+        <td><img src="./img/doeProfile.png" alt="explore"></td>
+    </tr>
+    <tr>        
+        <td><img src="./img/doeHouse.png" alt="explore"></td>
+    </tr>
+</table>
 
