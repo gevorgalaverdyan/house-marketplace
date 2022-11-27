@@ -37,6 +37,10 @@ function Slider() {
     getListing();
   }, []);
 
+  if(listings.length === 0){
+    return <></>;
+  }
+  
   return loading ? (
     <Spinner />
   ) : (

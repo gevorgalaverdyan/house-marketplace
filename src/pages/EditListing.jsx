@@ -7,8 +7,6 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import {
-  addDoc,
-  collection,
   serverTimestamp,
   doc,
   getDoc,
@@ -63,17 +61,28 @@ function EditListing() {
   const params = useParams();
 
   useEffect(() => {
+    if (listing && listing.userRef !== auth.currentUser.uid) {
+      setLoading(false);
+      toast.error('Access Denied');
+      navigate('/');
+    }
+  }, [listing, auth.currentUser.uid, navigate]);
+
+  //edit by owner
+  useEffect(() => {
     setLoading(true);
     const fetchListing = async () => {
-      const docRef = collection(db, 'listings', params.listingId);
+      const docRef = doc(db, 'listings', params.listingId);
       const docSnap = await getDoc(docRef);
 
-      if(docSnap.exists()){
-        setListing(docSnap.data())
-        setLoading(false)
-      }else{
-        navigate('/')
-        toast.error('Listing does not exist')
+      if (docSnap.exists()) {
+        setListing(docSnap.data());
+        setFormData({ ...docSnap.data(), address: docSnap.data().location });
+        setLoading(false);
+      } else {
+        setLoading(false);
+        navigate('/');
+        toast.error('Listing does not exist');
       }
     };
 
@@ -203,7 +212,8 @@ function EditListing() {
     delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
-    const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
+    const docRef = doc(db, 'listings', params.listingId);
+    await updateDoc(docRef, formDataCopy);
     setLoading(false);
     toast.success('Listing saved');
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);
